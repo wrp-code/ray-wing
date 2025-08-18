@@ -1,6 +1,6 @@
-package com.wrp.raywing.user.mapper;
+package com.wrp.raywing.blog.mapper;
 
-import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.blog.entity.ArticleEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

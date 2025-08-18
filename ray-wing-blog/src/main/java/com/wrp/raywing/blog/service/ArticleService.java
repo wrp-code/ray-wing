@@ -1,10 +1,11 @@
-package com.wrp.raywing.user.service;
+package com.wrp.raywing.blog.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.blog.entity.ArticleEntity;
 
 import com.wrp.raywing.common.domain.PageParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 文章
@@ -15,5 +16,7 @@ import com.wrp.raywing.common.domain.PageParam;
 public interface ArticleService extends IService<ArticleEntity> {
 
     IPage<ArticleEntity> page(PageParam<Object> pageParam);
+
+    void upload(MultipartFile file);
 }
 

@@ -1,4 +1,4 @@
-package com.wrp.raywing.user.controller;
+package com.wrp.raywing.blog.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.wrp.raywing.user.entity.ArticleEntity;
-import com.wrp.raywing.user.service.ArticleService;
+import com.wrp.raywing.blog.entity.ArticleEntity;
+import com.wrp.raywing.blog.service.ArticleService;
 import com.wrp.raywing.common.domain.PageParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -70,5 +71,14 @@ public class ArticleController {
         return Result.success();
     }
 
+    /**
+     * 上传markdown格式文章
+     */
+    @Operation(summary = "上传markdown格式文章", description = "上传markdown文件来创建文章")
+    @PostMapping("upload")
+    public Result<Void> upload(@RequestPart("file") MultipartFile file){
+        articleService.upload(file);
+        return Result.success();
+    }
 
 }

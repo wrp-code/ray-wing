@@ -1,4 +1,4 @@
-package com.wrp.raywing.user.entity;
+package com.wrp.raywing.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 
