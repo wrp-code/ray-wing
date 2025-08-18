@@ -11,6 +11,7 @@
 
 <script setup>
 import { getArticleDetail } from '../api/article'
+import { useRoute } from 'vue-router'
 import { ref, onMounted, watch, nextTick } from 'vue'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
@@ -74,9 +75,13 @@ const addCopyButtons = (el) => {
   })
 }
 
+const route = useRoute();
+
+const id = ref(route.query.id) // 获取查询参数中的id
+
 // 获取文章数据
 const fetchArticle = async () => {
-  const articleDetail = await getArticleDetail('1957292352636657665')
+  const articleDetail = await getArticleDetail(id.value)
   article.value = {
     id: articleDetail.id,
     title: articleDetail.title,

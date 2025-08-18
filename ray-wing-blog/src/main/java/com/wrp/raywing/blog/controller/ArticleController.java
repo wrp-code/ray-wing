@@ -1,6 +1,5 @@
 package com.wrp.raywing.blog.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.wrp.raywing.blog.entity.ArticleEntity;
 import com.wrp.raywing.blog.service.ArticleService;
-import com.wrp.raywing.common.domain.PageParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 /**
@@ -28,14 +28,13 @@ public class ArticleController {
     private ArticleService articleService;
 
     /**
-     * 列表
+     * 根据目录id获取文章列表
      */
-    @Operation(summary = "分页查询")
-    @PostMapping("/list")
-    public Result<IPage<ArticleEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
-        IPage<ArticleEntity> page = articleService.page(pageParam);
+    @Operation(summary = "根据目录id获取文章列表")
+    @GetMapping("/list")
+    public Result<List<ArticleEntity>> list(@RequestParam("catalogId") Long catalogId){
 
-        return Result.success(page);
+        return Result.success(articleService.listByCatalogId(catalogId));
     }
 
     /**

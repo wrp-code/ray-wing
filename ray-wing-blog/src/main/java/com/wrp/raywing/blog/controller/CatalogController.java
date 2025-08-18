@@ -28,7 +28,7 @@ public class CatalogController {
      * 查询文章目录树状结构
      */
     @Operation(summary = "查询文章目录树状结构")
-    @GetMapping()
+    @GetMapping("tree")
     public Result<List<CatalogEntity>> list() {
         return Result.success(catalogService.tree());
     }

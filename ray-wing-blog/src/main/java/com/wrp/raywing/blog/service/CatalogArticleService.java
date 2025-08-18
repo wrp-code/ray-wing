@@ -6,6 +6,8 @@ import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 
 import com.wrp.raywing.common.domain.PageParam;
 
+import java.util.List;
+
 /**
  * 目录分类关联文章
  *
@@ -15,5 +17,7 @@ import com.wrp.raywing.common.domain.PageParam;
 public interface CatalogArticleService extends IService<CatalogArticleEntity> {
 
     IPage<CatalogArticleEntity> page(PageParam<Object> pageParam);
+
+    List<CatalogArticleEntity> listByCatalogId(Long catalogId);
 }
 

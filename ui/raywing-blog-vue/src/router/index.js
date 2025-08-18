@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ArticleDetail from '../views/ArticleDetail.vue'
 
 // 1. 定义路由组件（懒加载推荐）
 const Home = () => import('@/views/Home.vue')
-// const ArticleDetail = () => import('@/views/ArticleDetail.vue')
+const ArticleDetail = () => import('@/views/ArticleDetail.vue')
+const ArticleList = () => import('@/views/ArticleList.vue')
 
 // 2. 定义路由规则
 const routes = [
@@ -15,7 +15,12 @@ const routes = [
   {
     path: '/article/detail',
     name: 'articleDetail',
-    component: ArticleDetail
+    component: ArticleDetail,
+  },
+  {
+    path: '/article/list',
+    name: 'articleList',
+    component: ArticleList
   }
 ]
 

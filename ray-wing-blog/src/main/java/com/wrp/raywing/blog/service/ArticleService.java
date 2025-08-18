@@ -7,6 +7,8 @@ import com.wrp.raywing.blog.entity.ArticleEntity;
 import com.wrp.raywing.common.domain.PageParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * 文章
  *
@@ -18,5 +20,7 @@ public interface ArticleService extends IService<ArticleEntity> {
     IPage<ArticleEntity> page(PageParam<Object> pageParam);
 
     void upload(MultipartFile file);
+
+    List<ArticleEntity> listByCatalogId(Long catalogId);
 }
 
