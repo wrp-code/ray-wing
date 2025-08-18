@@ -36,6 +36,7 @@ const vHighlight = {
   mounted(el) {
     highlightCodeBlocks(el)
     addCopyButtons(el)
+    
   },
   updated(el) {
     highlightCodeBlocks(el)

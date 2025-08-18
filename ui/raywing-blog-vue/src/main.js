@@ -5,6 +5,5 @@ import router from './router' // 导入路由配置
 const app  = createApp(App)
 
 
-
 app.use(router).mount('#app')
 
