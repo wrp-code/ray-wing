@@ -21,5 +21,7 @@ springdoc:
   group-configs:
     - group: 文章管理
       paths-to-match: /article/**
+    - group: 目录管理
+      paths-to-match: /catalog/**
   cache:
     disabled: true
