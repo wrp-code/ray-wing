@@ -1,0 +1,28 @@
+package ${package}.${moduleName}.service.impl;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.service.${className}Service;
+import ${package}.common.domain.PageParam;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @since ${datetime}
+ */
+@Service("${classname}Service")
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}Entity>
+        implements ${className}Service {
+
+    @Override
+    public IPage<${className}Entity> page(PageParam<Object> pageParam) {
+        IPage<${className}Entity> page = new Page<>(pageParam.getPageNo(), pageParam.getPageSize());
+        return page(page, null);
+    }
+}
