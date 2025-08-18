@@ -2,18 +2,18 @@ package com.wrp.raywing.user.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.user.entity.RoleEntity;
 
 import com.wrp.raywing.common.domain.PageParam;
 
 /**
- * 文章
+ * 功能
  *
  * @author wrp
- * @since 2025-08-18 09:49:16
+ * @since 2025-08-18 11:24:19
  */
-public interface ArticleService extends IService<ArticleEntity> {
+public interface RoleService extends IService<RoleEntity> {
 
-    IPage<ArticleEntity> page(PageParam<Object> pageParam);
+    IPage<RoleEntity> page(PageParam<Object> pageParam);
 }
 

@@ -1,4 +1,4 @@
-package com.wrp.raywing.blog;
+package com.wrp.raywing.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

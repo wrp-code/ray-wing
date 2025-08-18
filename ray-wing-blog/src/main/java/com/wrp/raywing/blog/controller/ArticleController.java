@@ -1,4 +1,4 @@
-package com.wrp.raywing.blog.controller;
+package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.wrp.raywing.blog.entity.ArticleEntity;
-import com.wrp.raywing.blog.service.ArticleService;
+import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.user.service.ArticleService;
 import com.wrp.raywing.common.domain.PageParam;
 
 

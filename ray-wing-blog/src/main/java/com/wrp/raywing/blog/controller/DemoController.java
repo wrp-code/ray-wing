@@ -1,4 +1,4 @@
-package com.wrp.raywing.blog.controller;
+package com.wrp.raywing.user.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

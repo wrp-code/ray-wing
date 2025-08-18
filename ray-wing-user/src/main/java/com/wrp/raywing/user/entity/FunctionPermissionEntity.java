@@ -2,29 +2,30 @@ package com.wrp.raywing.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 
+
+
 import com.wrp.raywing.common.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 文章
+ * ${comments}
  * 
  * @author wrp
- * @since 2025-08-18 09:49:16
+ * @since 2025-08-18 11:24:19
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName(value = "article", autoResultMap = true)
-public class ArticleEntity extends BaseEntity {
+@TableName(value = "system.function_permission", autoResultMap = true)
+public class FunctionPermissionEntity extends BaseEntity {
 
 	/**
-	 * 文章
+	 * $column.comments
 	 */
-
-	private String title;
+	private Long functionId;
 	/**
-	 * 文章内容
+	 * $column.comments
 	 */
-	private String content;
+	private Long permissionId;
 
 }

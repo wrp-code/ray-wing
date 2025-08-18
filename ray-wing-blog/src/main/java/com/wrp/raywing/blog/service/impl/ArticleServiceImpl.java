@@ -1,13 +1,13 @@
-package com.wrp.raywing.blog.service.impl;
+package com.wrp.raywing.user.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.wrp.raywing.blog.mapper.ArticleMapper;
-import com.wrp.raywing.blog.entity.ArticleEntity;
-import com.wrp.raywing.blog.service.ArticleService;
+import com.wrp.raywing.user.mapper.ArticleMapper;
+import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.user.service.ArticleService;
 import com.wrp.raywing.common.domain.PageParam;
 
 /**

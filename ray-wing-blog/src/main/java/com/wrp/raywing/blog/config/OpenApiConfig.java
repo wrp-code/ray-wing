@@ -1,4 +1,4 @@
-package com.wrp.raywing.blog.config;
+package com.wrp.raywing.user.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;

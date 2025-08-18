@@ -1,16 +1,16 @@
 package com.wrp.raywing.user.mapper;
 
-import com.wrp.raywing.user.entity.ArticleEntity;
+import com.wrp.raywing.user.entity.RoleEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 文章
+ * 功能
  * 
  * @author wrp
- * @since 2025-08-18 09:49:16
+ * @since 2025-08-18 11:24:19
  */
 @Mapper
-public interface ArticleMapper extends BaseMapper<ArticleEntity> {
+public interface RoleMapper extends BaseMapper<RoleEntity> {
 	
 }

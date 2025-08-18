@@ -18,6 +18,7 @@
     <module>ray-wing-common</module>
     <module>ray-wing-blog</module>
     <module>ray-wing-generator</module>
+      <module>ray-wing-user</module>
   </modules>
 
   <properties>

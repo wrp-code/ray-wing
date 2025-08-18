@@ -2,29 +2,30 @@ package com.wrp.raywing.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 
+
+
 import com.wrp.raywing.common.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 文章
+ * 功能
  * 
  * @author wrp
- * @since 2025-08-18 09:49:16
+ * @since 2025-08-18 11:24:19
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName(value = "article", autoResultMap = true)
-public class ArticleEntity extends BaseEntity {
+@TableName(value = "system.role", autoResultMap = true)
+public class RoleEntity extends BaseEntity {
 
 	/**
-	 * 文章
+	 * 角色
 	 */
-
-	private String title;
+	private String roleName;
 	/**
-	 * 文章内容
+	 * 描述
 	 */
-	private String content;
+	private String description;
 
 }
