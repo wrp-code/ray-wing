@@ -1,15 +1,49 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import Catalog from './components/Catalog.vue';
+import TOC from './components/TOC.vue';
 </script>
 
 <template>
-  <router-view /> <!-- 路由匹配的组件会渲染在这里 -->
+  <div class="container">
+    <div class="content">
+      <!-- 你的Markdown内容 -->
+      <router-view /> <!-- 路由匹配的组件会渲染在这里 -->
+    </div>
+  
 
   <!-- <Catalog class="catalog"/> -->
+   <div class="sidebar">
+      <TOC :markdownContent="markdownText" />
+    </div>
+  </div>
 </template>
 
+<script>
+import {  ref } from "vue"
+const markdownText = ref(`
+# 标题1
+## 标题1.1
+### 标题1.1.1
+## 标题1.2
+# 标题2
+    `);
+
+</script>
+
 <style scoped>
+.container {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+.sidebar {
+  width: 250px;
+  padding: 20px;
+}
 
 .catalog {
   position: fixed;

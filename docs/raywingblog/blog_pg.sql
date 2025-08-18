@@ -11,12 +11,14 @@ CREATE TABLE IF NOT EXISTS public.article
 
     title varchar NOT NULL,
     content text NOT NULL,
+    content_table json,
     CONSTRAINT article_pkey PRIMARY KEY (id)
     );
 COMMENT ON TABLE public.article
     IS '文章';
 COMMENT ON COLUMN  public.article.title IS '文章';
 COMMENT ON COLUMN  public.article.content IS '文章内容';
+COMMENT ON COLUMN  public.article.content_table IS '带锚点链接的目录';
 
 
 -- 目录分类

@@ -6,6 +6,8 @@ import com.wrp.raywing.common.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * 文章
  * 
@@ -26,5 +28,10 @@ public class ArticleEntity extends BaseEntity {
 	 * 文章内容
 	 */
 	private String content;
+
+	/**
+	 * 带锚点的目录列表
+	 */
+	private List<String> contentTable;
 
 }
