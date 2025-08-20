@@ -1,8 +1,9 @@
 package com.wrp.raywing.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import com.wrp.raywing.common.domain.BaseEntity;
+import com.wrp.raywing.common.typehandler.StringListTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -32,6 +33,7 @@ public class ArticleEntity extends BaseEntity {
 	/**
 	 * 带锚点的目录列表
 	 */
+	@TableField(typeHandler = StringListTypeHandler.class)
 	private List<String> contentTable;
 
 }
