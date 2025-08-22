@@ -1,15 +1,22 @@
 <template>
   <div class="article-container">
-    <h2 class="article-title">{{ article.title }}</h2>
+    <div class="content">
+      <h2 class="article-title">{{ article.title }}</h2>
     <div 
       v-highlight 
       v-html="compiledMarkdown" 
       class="markdown-body"
     ></div>
+    </div>
+
+    <div class="sidebar">
+      <TOC :markdownContent="markdownText" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import TOC from '../components/TOC.vue';
 import { getArticleDetail } from '../api/article'
 import { useRoute } from 'vue-router'
 import { ref, onMounted, watch, nextTick } from 'vue'
@@ -17,6 +24,14 @@ import { marked } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
 import 'github-markdown-css/github-markdown.css'
+
+const markdownText = ref(`
+# 标题1
+## 标题1.1
+### 标题1.1.1
+## 标题1.2
+# 标题2
+    `);
 
 // 初始化marked配置
 marked.setOptions({
@@ -161,4 +176,19 @@ onMounted(async () => {
     border-radius: 6px;
   }
 }
+
+.article-container {
+  display: flex;
+}
+
+.content {
+  padding: 20px;
+  min-width: 800px;
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+}
+
 </style>

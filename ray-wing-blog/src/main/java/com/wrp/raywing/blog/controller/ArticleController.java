@@ -1,5 +1,6 @@
 package com.wrp.raywing.blog.controller;
 
+import com.wrp.raywing.common.annotation.UpdateGroup;
 import com.wrp.raywing.common.domain.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -54,7 +55,7 @@ public class ArticleController {
     @Operation(summary = "保存文章")
     @PostMapping("save")
     public Result<Void> save(@RequestBody @Validated ArticleEntity article){
-		articleService.save(article);
+		articleService.submit(article);
 
         return Result.success();
     }
@@ -64,8 +65,8 @@ public class ArticleController {
      */
     @Operation(summary = "更新文章")
     @PutMapping("update")
-    public Result<Void> update(@RequestBody @Validated ArticleEntity article){
-		articleService.updateById(article);
+    public Result<Void> update(@RequestBody @Validated(UpdateGroup.class) ArticleEntity article){
+		articleService.submit(article);
 
         return Result.success();
     }
@@ -75,8 +76,8 @@ public class ArticleController {
      */
     @Operation(summary = "上传markdown格式文章", description = "上传markdown文件来创建文章")
     @PostMapping("upload")
-    public Result<Void> upload(@RequestPart("file") MultipartFile file){
-        articleService.upload(file);
+    public Result<Void> upload(@RequestPart("file") MultipartFile file, @RequestParam(value = "id", required = false) Long id){
+        articleService.upload(file, id);
         return Result.success();
     }
 

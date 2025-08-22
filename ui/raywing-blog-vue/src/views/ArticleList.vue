@@ -72,6 +72,7 @@ function getArticleDetail (id) {
         padding: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
+        min-width: 800px;
         
         &:hover {
           transform: translateY(-2px);

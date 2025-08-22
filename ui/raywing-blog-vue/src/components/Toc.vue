@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, defineProps, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 
 const props = defineProps(['markdownContent'])
 
@@ -123,6 +123,7 @@ onUnmounted(() => {
   overflow-y: auto;
   padding: 10px;
   border-left: 1px solid #eee;
+  width: 300px;
 }
 
 .toc-container {

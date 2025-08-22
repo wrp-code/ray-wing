@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import Catalog from './components/Catalog.vue';
-import TOC from './components/TOC.vue';
+
 </script>
 
 <template>
@@ -13,21 +13,13 @@ import TOC from './components/TOC.vue';
   
 
   <!-- <Catalog class="catalog"/> -->
-   <div class="sidebar">
-      <TOC :markdownContent="markdownText" />
-    </div>
+   
   </div>
 </template>
 
 <script>
 import {  ref } from "vue"
-const markdownText = ref(`
-# 标题1
-## 标题1.1
-### 标题1.1.1
-## 标题1.2
-# 标题2
-    `);
+
 
 </script>
 

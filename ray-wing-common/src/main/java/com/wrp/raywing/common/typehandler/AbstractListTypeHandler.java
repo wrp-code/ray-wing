@@ -22,11 +22,7 @@ import java.util.List;
 public abstract class AbstractListTypeHandler<T> extends BaseTypeHandler<List<T>> {
     private static final PGobject jsonObject = new PGobject();
 
-    private final ObjectMapper objectMapper;
-
-    public AbstractListTypeHandler(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, List<T> parameter, JdbcType jdbcType) throws SQLException {
