@@ -1,11 +1,14 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import Menu from './components/Menu.vue'
 import Catalog from './components/Catalog.vue';
+
 
 </script>
 
 <template>
+ 
   <div class="container">
+    <Menu />
     <div class="content">
       <!-- 你的Markdown内容 -->
       <router-view /> <!-- 路由匹配的组件会渲染在这里 -->
@@ -25,7 +28,9 @@ import {  ref } from "vue"
 
 <style scoped>
 .container {
-  display: flex;
+  /* display: flex; */
+  height: 90vh;
+  width: 800px;
 }
 
 .content {

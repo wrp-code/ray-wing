@@ -1,6 +1,5 @@
 package com.wrp.raywing.blog.controller;
 
-import com.wrp.raywing.blog.dict.CatalogType;
 import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 import com.wrp.raywing.blog.entity.CatalogEntity;
 import com.wrp.raywing.blog.service.CatalogService;

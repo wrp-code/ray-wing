@@ -123,7 +123,7 @@ onUnmounted(() => {
   overflow-y: auto;
   padding: 10px;
   border-left: 1px solid #eee;
-  width: 300px;
+  width: 200px;
 }
 
 .toc-container {
