@@ -30,7 +30,6 @@ import {  ref } from "vue"
 
 .content {
   flex: 1;
-  padding: 20px;
 }
 .sidebar {
   width: 250px;

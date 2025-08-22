@@ -2,6 +2,7 @@ package com.wrp.raywing.blog.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wrp.raywing.blog.dict.CatalogType;
 import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 import com.wrp.raywing.blog.entity.CatalogEntity;
 
@@ -22,5 +23,7 @@ public interface CatalogService extends IService<CatalogEntity> {
     List<CatalogEntity> tree();
 
     void bind(CatalogArticleEntity catalogArticleEntity);
+
+    List<CatalogEntity> books(Long id);
 }
 

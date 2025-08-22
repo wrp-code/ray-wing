@@ -17,6 +17,12 @@ springdoc:
     operationsSorter: method
     disable-swagger-default-url: true
     use-root-path: true
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+    groups:
+      enabled: true
   show-actuator: true
   group-configs:
     - group: 文章管理

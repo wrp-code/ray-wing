@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS public.catalog
 
     name varchar NOT NULL,
     parent_id bigint,
+    catalog_type smallint NOT NULL default 1,
     article_count int NOT NULL default 0,
     description varchar,
     CONSTRAINT catalog_pkey PRIMARY KEY (id)

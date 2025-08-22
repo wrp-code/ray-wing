@@ -1,5 +1,6 @@
 package com.wrp.raywing.blog.controller;
 
+import com.wrp.raywing.blog.dict.CatalogType;
 import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 import com.wrp.raywing.blog.entity.CatalogEntity;
 import com.wrp.raywing.blog.service.CatalogService;
@@ -31,6 +32,12 @@ public class CatalogController {
     @GetMapping("tree")
     public Result<List<CatalogEntity>> list() {
         return Result.success(catalogService.tree());
+    }
+
+    @Operation(summary = "查询书籍列表")
+    @GetMapping("books")
+    public Result<List<CatalogEntity>> books(@RequestParam(value = "id", required = false) Long id) {
+        return Result.success(catalogService.books(id));
     }
 
     /**

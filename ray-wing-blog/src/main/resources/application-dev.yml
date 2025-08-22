@@ -12,6 +12,10 @@ spring:
       minimum-idle: 8
       auto-commit: true
 
+springdoc:
+  swagger-ui:
+
+
 logging:
   level:
     com:
