@@ -1,6 +1,7 @@
 package com.wrp.raywing.common.exception;
 
 import com.wrp.raywing.common.domain.Result;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
  * @author wrp
  * @since 2025年07月04日 21:25
  */
+@Hidden // 解决knite4j版本不兼容导致的问题
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionControllerAdvice {

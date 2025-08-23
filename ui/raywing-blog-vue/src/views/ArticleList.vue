@@ -104,7 +104,7 @@ function getArticleDetail (id) {
 }
 .book-context {
   display: flex;
-  justify-content: center;        /* 居中对齐 */
+  justify-content: left;        /* 居中对齐 */
   align-content: center;
 }
 
