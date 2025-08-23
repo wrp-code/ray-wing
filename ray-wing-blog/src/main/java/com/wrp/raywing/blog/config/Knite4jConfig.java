@@ -1,4 +1,4 @@
-package com.wrp.raywing.common.config;
+package com.wrp.raywing.blog.config;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -27,7 +27,7 @@ public class Knite4jConfig {
     @Bean
     public OpenAPI docsOpenApi() {
         return new OpenAPI()
-                .info(new Info().title("RayWing's 个人博客网站")
+                .info(new Info().title("RayWing's 个人博客网站接口文档")
                         .description("RayWing's 个人博客网站，基于SpringBoot3 + Vue3")
                         .contact(new Contact().name("wrp"))
                         .version("v1.0"))

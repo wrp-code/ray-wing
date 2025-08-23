@@ -26,37 +26,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, onUpdated } from 'vue';
 
 const props = defineProps(['markdownContent'])
 
-const markdownContent = ref(props.markdownContent)
+const toc = ref([])
 
+onUpdated(async()=> {
+  generateTOC()
+})
 
-const toc = ref([]);
 const activeAnchor = ref('');
 
 // 解析Markdown生成目录
 const generateTOC = () => {
   const headers = [];
-  const lines = props.markdownContent.split('\n');
-  const headerRegex = /^(#{1,6})\s+(.*)$/;
   
-  lines.forEach(line => {
-    const match = line.match(headerRegex);
-    if (match) {
-      const level = match[1].length;
-      const title = match[2].trim();
-        const anchor = title.toLowerCase()
-          .replace(/[^\w\s-]/g, '')
-          .replace(/\s+/g, '-');
-        
-        headers.push({
-          level,
-          title,
-          anchor
+  props.markdownContent.map(content => {
+    headers.push({
+          level: content.level,
+          title: content.title,
+          anchor: content.title
         });
-    }
   });
   
   toc.value = headers;
@@ -99,7 +90,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  generateTOC();
+  // generateTOC();
   window.addEventListener('scroll', handleScroll);
   
   // 检查初始hash
@@ -113,6 +104,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 
+
 </script>
 
 <style scoped>
@@ -123,7 +115,7 @@ onUnmounted(() => {
   overflow-y: auto;
   padding: 10px;
   border-left: 1px solid #eee;
-  width: 200px;
+  width: 250px;
 }
 
 .toc-container {
@@ -132,7 +124,7 @@ onUnmounted(() => {
 
 .toc-title {
   margin: 0 0 10px 0;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
 }
 
