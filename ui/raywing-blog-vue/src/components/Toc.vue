@@ -10,8 +10,9 @@
           :style="{ paddingLeft: `${item.level * 12}px` }"
         >
           <a 
+            :id="item.anchor"
             :href="`#${item.anchor}`" 
-            @click.prevent="scrollToAnchor(item.anchor)"
+            @click="scrollToAnchor(item.anchor)"
             :class="{ active: activeAnchor === item.anchor }"
           >
             {{ item.title }}
@@ -26,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, onUpdated } from 'vue';
+import { ref, onMounted, onUnmounted, onUpdated } from 'vue';
 
 const props = defineProps(['markdownContent'])
 
@@ -55,6 +56,7 @@ const generateTOC = () => {
 
 // 平滑滚动到锚点
 const scrollToAnchor = (anchor) => {
+  console.log("click")
   const element = document.getElementById(anchor);
   if (element) {
     activeAnchor.value = anchor;
@@ -135,7 +137,7 @@ onUnmounted(() => {
 }
 
 .toc-item {
-  margin: 4px 0;
+  /* margin: 4px 0; */
   transition: all 0.2s ease;
 }
 

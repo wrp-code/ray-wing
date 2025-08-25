@@ -11,7 +11,7 @@
                     </div>
                     <h3>学习笔记</h3>
                     <p>记录技术学习过程中的知识点、心得体会和教程分享</p>
-                    <a href="/article/list" class="btn">查看笔记</a>
+                    <router-link to="/article/list" class="btn">查看笔记</router-link>
                 </div>
 
                 <div class="module-card projects">
@@ -20,7 +20,7 @@
                     </div>
                     <h3>项目展示</h3>
                     <p>展示个人开发的项目，包括Web应用、移动应用和其他创意项目</p>
-                    <a href="/project/list" class="btn">查看项目</a>
+                     <router-link to="/project/list" class="btn">查看项目</router-link>
                 </div>
 
                 <!-- <div class="module-card drawing">

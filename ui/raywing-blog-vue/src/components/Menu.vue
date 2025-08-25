@@ -22,23 +22,24 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 
 const activeIndex = ref('1')
 const route = useRoute()
 
-onBeforeMount(()=> {
+// 自动收集函数内的响应式依赖 如route
+watchEffect(() => {
   const path = route.path;
-  if(path == '/') {
+  if (path === '/') {
     activeIndex.value = '1'
-  } else if(path == '/article/list') {
+  } else if (path === '/article/list') {
     activeIndex.value = '2'
-  } else if(path == '/project/list') {
+  } else if (path === '/project/list') {
     activeIndex.value = '3'
-  } else if(path == '/drawing') {
+  } else if (path === '/drawing') {
     activeIndex.value = '4'
-  } else if(path == '/about') {
+  } else if (path === '/about') {
     activeIndex.value = '5'
   }
 })
