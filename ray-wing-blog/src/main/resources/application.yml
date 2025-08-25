@@ -29,5 +29,7 @@ springdoc:
       paths-to-match: /article/**
     - group: 目录管理
       paths-to-match: /catalog/**
+    - group: 存储管理
+      paths-to-match: /store/**
   cache:
     disabled: true

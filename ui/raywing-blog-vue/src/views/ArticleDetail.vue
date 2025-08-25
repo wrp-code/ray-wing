@@ -1,7 +1,7 @@
 <template>
   <div class="article-container">
     <div class="content">
-      <h2 class="article-title">{{ article.title }}</h2>
+      <h1 class="article-title">{{ article.title }}</h1>
     <div 
       v-highlight 
       v-html="compiledMarkdown" 
@@ -46,11 +46,12 @@ const vHighlight = {
   mounted(el) {
     highlightCodeBlocks(el)
     addCopyButtons(el)
-    
+    addId(el)
   },
   updated(el) {
     highlightCodeBlocks(el)
     addCopyButtons(el)
+    addId(el)
   }
 }
 
@@ -61,6 +62,16 @@ const highlightCodeBlocks = (el) => {
     hljs.highlightElement(block)
     block.parentElement.style.position = 'relative'
   })
+}
+
+// 添加id
+const addId = (el) => {
+    const hs = document.querySelectorAll('.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6');
+
+    for(let i = 0; i< hs.length-1; i++) {
+      const anchor = markdownText.value[i].anchor
+      hs[i].id = anchor
+    }
 }
 
 // 添加复制按钮

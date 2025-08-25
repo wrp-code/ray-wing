@@ -79,6 +79,12 @@ async function queryArticleList(bookId) {
     list.value = data || [] // 确保list始终是数组
     if(data.length > 0) {
       showList.value = !showList.value
+    } else {
+      ElNotification({
+        title: 'Warning',
+        message: '暂无文章可供阅读',
+        type: 'warning',
+      })
     }
   } catch (error) {
     console.error('获取文章列表失败:', error)
@@ -110,6 +116,7 @@ function getArticleDetail (id) {
 
 .book-item {
   margin: 10px 10px;
+  width: 250px;
   font-size: 26px;
 }
 .book-item:hover {
@@ -121,8 +128,7 @@ function getArticleDetail (id) {
 
 .article-list-container {
   padding: 20px;
-  height: 80vh;
-  width: 800px;
+
   margin: 0 auto;
   
   .list-title {
@@ -148,7 +154,6 @@ function getArticleDetail (id) {
         padding: 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-        min-width: 800px;
         cursor: pointer;
         
         &:hover {

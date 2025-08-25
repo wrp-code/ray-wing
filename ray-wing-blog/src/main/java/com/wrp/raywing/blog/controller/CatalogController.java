@@ -44,9 +44,9 @@ public class CatalogController {
      */
     @Operation(summary = "添加目录")
     @PostMapping("add")
-    public Result<Void> add(@RequestBody CatalogEntity catalog) {
+    public Result<Long> add(@RequestBody CatalogEntity catalog) {
         catalogService.save(catalog);
-        return Result.success();
+        return Result.success(catalog.getId());
     }
 
     /**

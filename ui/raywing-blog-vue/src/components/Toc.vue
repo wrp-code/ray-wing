@@ -7,12 +7,11 @@
           v-for="(item, index) in toc" 
           :key="index" 
           :class="['toc-item', `toc-level-${item.level}`]"
+          @click="scrollToAnchor(item.anchor)"
         >
           <a 
-            :id="item.level"
             :href="`#${item.anchor}`" 
-            @click.prevent="scrollToAnchor(item.anchor)"
-            :class="{ active: activeAnchor === item.anchor }"
+            :class="{ active: activeAnchor == item.anchor }"
           >
             {{ item.title }}
           </a>
@@ -26,8 +25,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
+const router = useRouter()
 const props = defineProps(['markdownContent'])
 
 const toc = ref([])
@@ -36,123 +38,31 @@ const activeAnchor = ref('');
 // 监听markdownContent变化
 watch(() => props.markdownContent, () => {
   const headers = [];
-  
   if (props.markdownContent && Array.isArray(props.markdownContent)) {
-    let increacing = 1
     props.markdownContent.forEach(content => {
       if (content.level && content.title) {
         headers.push({
           level: content.level,
           title: content.title,
-          anchor: content.level + (increacing++)
+          anchor: content.anchor
         });
       }
     });
   }
-  
   toc.value = headers;
-  if (window.location.hash) {
-    const hash = window.location.hash.substring(1);
-    activeAnchor.value = hash;
-  }
 }, { immediate: true, deep: true });
 
+function scrollToAnchor(anchor) {
+  activeAnchor.value = anchor
+  router.push(route.path + `#${anchor}`)
 
-// 平滑滚动到锚点
-const scrollToAnchor = (anchor) => {
-  const element = document.getElementById(anchor);
-  
-  if (element) {
-    // 更新活动锚点
-    activeAnchor.value = anchor;
-    
-    // 计算精确的滚动位置
-    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - 80; // 减去顶部导航栏高度
-    
-    // 平滑滚动
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
+  const destination = document.getElementById(anchor)
+   window.scrollTo({
+        top: destination.offsetTop,
+        behavior: 'smooth'
     });
-    
-    // 更新URL hash（不触发滚动）
-    history.replaceState(null, null, `#${anchor}`);
-    
-    // 滚动结束后再次确认位置（处理动态内容）
-    setTimeout(() => {
-      const finalPosition = element.getBoundingClientRect().top + window.pageYOffset - 80;
-      if (Math.abs(window.pageYOffset - finalPosition) > 5) {
-        window.scrollTo({
-          top: finalPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 300);
-  }
-};
+}
 
-// 监听滚动，高亮当前可见的标题
-const handleScroll = () => {
-  if (toc.value.length === 0) return;
-  
-  const headers = toc.value.map(item => ({
-    id: item.anchor,
-    element: document.getElementById(item.anchor),
-    level: item.level
-  })).filter(item => item.element);
-  
-  if (headers.length === 0) return;
-  
-  // 找到最接近视口顶部的标题
-  let closestHeader = null;
-  let minDistance = Infinity;
-  
-  for (const header of headers) {
-    const rect = header.element.getBoundingClientRect();
-    const distance = Math.abs(rect.top);
-    
-    if (rect.top <= 100 && distance < minDistance) {
-      minDistance = distance;
-      closestHeader = header;
-    }
-  }
-  
-  // 如果没有标题在视口上方，选择第一个
-  if (!closestHeader) {
-    const firstVisible = headers.find(header => 
-      header.element.getBoundingClientRect().top >= 0
-    );
-    closestHeader = firstVisible || headers[0];
-  }
-  
-  if (closestHeader && closestHeader.id !== activeAnchor.value) {
-    activeAnchor.value = closestHeader.id;
-    history.replaceState(null, null, `#${closestHeader.id}`);
-  }
-};
-
-// 防抖滚动监听
-let scrollTimeout = null;
-const debouncedHandleScroll = () => {
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(handleScroll, 50);
-};
-
-onMounted(() => {
-  window.addEventListener('scroll', debouncedHandleScroll);
-  
-  // 初始检查hash
-  if (window.location.hash) {
-    const hash = window.location.hash.substring(1);
-    scrollToAnchor(hash);
-  }
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', debouncedHandleScroll);
-  clearTimeout(scrollTimeout);
-});
 </script>
 
 <style scoped>

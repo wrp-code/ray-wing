@@ -8,11 +8,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>ray-wing-blog</artifactId>
+    <artifactId>ray-wing-store</artifactId>
     <packaging>jar</packaging>
 
-    <name>ray-wing-blog</name>
-    <description>springboot3 + vue3 个人博客</description>
+    <name>ray-wing-store</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,11 +21,6 @@
         <dependency>
             <groupId>com.wrp</groupId>
             <artifactId>ray-wing-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.wrp</groupId>
-            <artifactId>ray-wing-store</artifactId>
         </dependency>
     </dependencies>
 </project>

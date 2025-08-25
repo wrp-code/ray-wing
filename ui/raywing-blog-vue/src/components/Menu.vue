@@ -4,6 +4,7 @@
     class="el-menu-demo"
     mode="horizontal"
     :ellipsis="false"
+    router
   >
     <el-menu-item index="0">
       <img
@@ -12,38 +13,20 @@
         alt="Element logo"
       />
     </el-menu-item>
-    <router-link to="/"><el-menu-item index="1">首页</el-menu-item></router-link>
-    <router-link to="/article/list"><el-menu-item index="2">专栏</el-menu-item></router-link>
-    <router-link to="/project/list"><el-menu-item index="3">项目</el-menu-item></router-link>
-    <router-link to="/drawing"><el-menu-item index="4">绘图</el-menu-item></router-link>
-    <router-link to="/about"><el-menu-item index="5">介绍</el-menu-item></router-link>
-    
+    <el-menu-item index="/">首页</el-menu-item>
+    <el-menu-item index="/article/list">笔记</el-menu-item>
+    <el-menu-item index="/project/list">项目</el-menu-item>
+    <el-menu-item index="/drawing">画册</el-menu-item>
+    <el-menu-item index="/about">介绍</el-menu-item>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-const activeIndex = ref('1')
 const route = useRoute()
-
-// 自动收集函数内的响应式依赖 如route
-watchEffect(() => {
-  const path = route.path;
-  if (path === '/') {
-    activeIndex.value = '1'
-  } else if (path === '/article/list') {
-    activeIndex.value = '2'
-  } else if (path === '/project/list') {
-    activeIndex.value = '3'
-  } else if (path === '/drawing') {
-    activeIndex.value = '4'
-  } else if (path === '/about') {
-    activeIndex.value = '5'
-  }
-})
-
+const activeIndex = computed(() => route.path)
 </script>
 
 <style scoped>

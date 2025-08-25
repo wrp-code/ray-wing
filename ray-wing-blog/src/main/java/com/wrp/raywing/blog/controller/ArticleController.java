@@ -54,10 +54,8 @@ public class ArticleController {
      */
     @Operation(summary = "保存文章")
     @PostMapping("save")
-    public Result<Void> save(@RequestBody @Validated ArticleEntity article){
-		articleService.submit(article);
-
-        return Result.success();
+    public Result<Long> save(@RequestBody @Validated ArticleEntity article){
+        return Result.success(articleService.submit(article));
     }
 
     /**
@@ -65,10 +63,8 @@ public class ArticleController {
      */
     @Operation(summary = "更新文章")
     @PutMapping("update")
-    public Result<Void> update(@RequestBody @Validated(UpdateGroup.class) ArticleEntity article){
-		articleService.submit(article);
-
-        return Result.success();
+    public Result<Long> update(@RequestBody @Validated(UpdateGroup.class) ArticleEntity article){
+        return Result.success(articleService.submit(article));
     }
 
     /**
@@ -76,9 +72,8 @@ public class ArticleController {
      */
     @Operation(summary = "上传markdown格式文章", description = "上传markdown文件来创建文章")
     @PostMapping("upload")
-    public Result<Void> upload(@RequestPart("file") MultipartFile file, @RequestParam(value = "id", required = false) Long id){
-        articleService.upload(file, id);
-        return Result.success();
+    public Result<Long> upload(@RequestPart("file") MultipartFile file, @RequestParam(value = "id", required = false) Long id){
+        return Result.success(articleService.upload(file, id));
     }
 
 }

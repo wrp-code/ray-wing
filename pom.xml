@@ -19,6 +19,7 @@
     <module>ray-wing-blog</module>
     <module>ray-wing-generator</module>
       <module>ray-wing-user</module>
+      <module>ray-wing-store</module>
   </modules>
 
   <properties>
@@ -62,6 +63,18 @@
       <dependency>
         <groupId>com.wrp</groupId>
         <artifactId>ray-wing-common</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.wrp</groupId>
+        <artifactId>ray-wing-store</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.wrp</groupId>
+        <artifactId>ray-wing-user</artifactId>
         <version>${revision}</version>
       </dependency>
     </dependencies>

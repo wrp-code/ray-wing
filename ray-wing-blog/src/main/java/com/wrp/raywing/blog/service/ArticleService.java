@@ -19,10 +19,10 @@ public interface ArticleService extends IService<ArticleEntity> {
 
     IPage<ArticleEntity> page(PageParam<Object> pageParam);
 
-    void upload(MultipartFile file, Long id);
+    Long upload(MultipartFile file, Long id);
 
     List<ArticleEntity> listByCatalogId(Long catalogId);
 
-    void submit(ArticleEntity article);
+    Long submit(ArticleEntity article);
 }
 

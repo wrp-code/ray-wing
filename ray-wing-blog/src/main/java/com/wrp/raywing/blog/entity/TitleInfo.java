@@ -21,4 +21,8 @@ public class TitleInfo {
      * 标题名称
      */
     private String title;
+    /**
+     * 锚点
+     */
+    private int anchor;
 }

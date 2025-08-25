@@ -46,7 +46,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
     }
 
     @Override
-    public void upload(MultipartFile file, Long id) {
+    public Long upload(MultipartFile file, Long id) {
         String fileName = file.getOriginalFilename();
         String content;
         try {
@@ -63,6 +63,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         entity.setTitle(fileName.substring(0, fileName.lastIndexOf(".")));
         entity.setContentTable(extractTitles(content));
         this.saveOrUpdate(entity);
+
+        return entity.getId();
     }
 
     @Override
@@ -79,9 +81,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
     }
 
     @Override
-    public void submit(ArticleEntity article) {
+    public Long submit(ArticleEntity article) {
         article.setContentTable(extractTitles(article.getContent()));
         saveOrUpdate(article);
+        return article.getId();
     }
 
     private List<TitleInfo> extractTitles(String markdownText) {
@@ -91,11 +94,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         String regex = "^(#{1,6})\\s+(.*)$";
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(removeCodeBlocks(markdownText));
-
+        int index = 1;
         while (matcher.find()) {
             int level = matcher.group(1).length(); // 标题级别
             String title = matcher.group(2).trim(); // 标题内容
-            titles.add(new TitleInfo(level, title));
+            titles.add(new TitleInfo(level, title, level * 10000 + (index++)));
         }
 
         return titles;
