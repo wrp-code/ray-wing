@@ -7,12 +7,11 @@
           v-for="(item, index) in toc" 
           :key="index" 
           :class="['toc-item', `toc-level-${item.level}`]"
-          :style="{ paddingLeft: `${item.level * 12}px` }"
         >
           <a 
-            :id="item.anchor"
+            :id="item.level"
             :href="`#${item.anchor}`" 
-            @click="scrollToAnchor(item.anchor)"
+            @click.prevent="scrollToAnchor(item.anchor)"
             :class="{ active: activeAnchor === item.anchor }"
           >
             {{ item.title }}
@@ -27,107 +26,159 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, onUpdated } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 const props = defineProps(['markdownContent'])
 
 const toc = ref([])
-
-onUpdated(async()=> {
-  generateTOC()
-})
-
 const activeAnchor = ref('');
 
-// 解析Markdown生成目录
-const generateTOC = () => {
+// 监听markdownContent变化
+watch(() => props.markdownContent, () => {
   const headers = [];
   
-  props.markdownContent.map(content => {
-    headers.push({
+  if (props.markdownContent && Array.isArray(props.markdownContent)) {
+    let increacing = 1
+    props.markdownContent.forEach(content => {
+      if (content.level && content.title) {
+        headers.push({
           level: content.level,
           title: content.title,
-          anchor: content.title
+          anchor: content.level + (increacing++)
         });
-  });
+      }
+    });
+  }
   
   toc.value = headers;
-};
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    activeAnchor.value = hash;
+  }
+}, { immediate: true, deep: true });
+
 
 // 平滑滚动到锚点
 const scrollToAnchor = (anchor) => {
-  console.log("click")
   const element = document.getElementById(anchor);
+  
   if (element) {
+    // 更新活动锚点
     activeAnchor.value = anchor;
+    
+    // 计算精确的滚动位置
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - 80; // 减去顶部导航栏高度
+    
+    // 平滑滚动
     window.scrollTo({
-      top: element.offsetTop - 20,
+      top: offsetPosition,
       behavior: 'smooth'
     });
     
     // 更新URL hash（不触发滚动）
-    history.pushState(null, null, `#${anchor}`);
+    history.replaceState(null, null, `#${anchor}`);
+    
+    // 滚动结束后再次确认位置（处理动态内容）
+    setTimeout(() => {
+      const finalPosition = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      if (Math.abs(window.pageYOffset - finalPosition) > 5) {
+        window.scrollTo({
+          top: finalPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 300);
   }
 };
 
 // 监听滚动，高亮当前可见的标题
 const handleScroll = () => {
+  if (toc.value.length === 0) return;
+  
   const headers = toc.value.map(item => ({
     id: item.anchor,
-    element: document.getElementById(item.anchor)
+    element: document.getElementById(item.anchor),
+    level: item.level
   })).filter(item => item.element);
   
-  let currentActive = '';
+  if (headers.length === 0) return;
+  
+  // 找到最接近视口顶部的标题
+  let closestHeader = null;
+  let minDistance = Infinity;
+  
   for (const header of headers) {
     const rect = header.element.getBoundingClientRect();
-    if (rect.top >= 0 && rect.top <= 200) {
-      currentActive = header.id;
-      break;
+    const distance = Math.abs(rect.top);
+    
+    if (rect.top <= 100 && distance < minDistance) {
+      minDistance = distance;
+      closestHeader = header;
     }
   }
   
-  if (currentActive && currentActive !== activeAnchor.value) {
-    activeAnchor.value = currentActive;
+  // 如果没有标题在视口上方，选择第一个
+  if (!closestHeader) {
+    const firstVisible = headers.find(header => 
+      header.element.getBoundingClientRect().top >= 0
+    );
+    closestHeader = firstVisible || headers[0];
+  }
+  
+  if (closestHeader && closestHeader.id !== activeAnchor.value) {
+    activeAnchor.value = closestHeader.id;
+    history.replaceState(null, null, `#${closestHeader.id}`);
   }
 };
 
+// 防抖滚动监听
+let scrollTimeout = null;
+const debouncedHandleScroll = () => {
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(handleScroll, 50);
+};
+
 onMounted(() => {
-  // generateTOC();
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', debouncedHandleScroll);
   
-  // 检查初始hash
+  // 初始检查hash
   if (window.location.hash) {
-    const anchor = window.location.hash.substring(1);
-    scrollToAnchor(anchor);
+    const hash = window.location.hash.substring(1);
+    scrollToAnchor(hash);
   }
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', debouncedHandleScroll);
+  clearTimeout(scrollTimeout);
 });
-
-
 </script>
 
 <style scoped>
 .markdown-toc {
   position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px);
+  top: 80px;
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding: 10px;
-  border-left: 1px solid #eee;
-  width: 250px;
+  border-left: 2px solid #e1e4e8;
+  width: 280px;
+  background: #fafbfc;
+  border-radius: 0 8px 8px 0;
 }
 
 .toc-container {
-  padding: 10px;
+  padding: 10px 5px;
 }
 
 .toc-title {
-  margin: 0 0 10px 0;
-  font-size: 1em;
-  font-weight: bold;
+  margin: 0 0 15px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #24292e;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e1e4e8;
 }
 
 .toc-list {
@@ -137,55 +188,97 @@ onUnmounted(() => {
 }
 
 .toc-item {
-  /* margin: 4px 0; */
+  margin: 6px 0;
+  line-height: 1.4;
   transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.toc-item:hover {
+  border-left-color: #42b983;
 }
 
 .toc-item a {
-  color: #666;
+  color: #586069;
   text-decoration: none;
   display: block;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
   transition: all 0.2s ease;
+  font-size: 0.95em;
 }
 
 .toc-item a:hover {
-  color: #333;
-  background-color: #f5f5f5;
+  color: #24292e;
+  background-color: #f6f8fa;
+  transform: translateX(2px);
 }
 
 .toc-item a.active {
   color: #42b983;
-  font-weight: bold;
-  background-color: #f0fff0;
+  font-weight: 600;
+  background-color: #f0fff4;
+  border-left-color: #42b983;
+  transform: translateX(4px);
 }
 
 .no-toc {
-  color: #999;
+  color: #959da5;
   font-style: italic;
+  padding: 20px;
+  text-align: center;
 }
 
-/* 不同级别标题的样式 */
+/* 不同级别标题的缩进和样式 */
 .toc-level-1 {
-  font-weight: bold;
+  margin-left: 0;
+  font-weight: 600;
 }
 
 .toc-level-2 {
-  font-weight: normal;
+  margin-left: 12px;
+  font-weight: 500;
 }
 
 .toc-level-3 {
+  margin-left: 24px;
   font-size: 0.9em;
 }
 
 .toc-level-4 {
+  margin-left: 36px;
   font-size: 0.85em;
   opacity: 0.9;
 }
 
-.toc-level-5, .toc-level-6 {
+.toc-level-5 {
+  margin-left: 48px;
   font-size: 0.8em;
   opacity: 0.8;
+}
+
+.toc-level-6 {
+  margin-left: 60px;
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
+/* 滚动条样式 */
+.markdown-toc::-webkit-scrollbar {
+  width: 4px;
+}
+
+.markdown-toc::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.markdown-toc::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.markdown-toc::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 </style>

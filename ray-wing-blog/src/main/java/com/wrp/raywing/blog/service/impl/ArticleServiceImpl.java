@@ -84,7 +84,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, ArticleEntity
         saveOrUpdate(article);
     }
 
-    private static List<TitleInfo> extractTitles(String markdownText) {
+    private List<TitleInfo> extractTitles(String markdownText) {
         List<TitleInfo> titles = new ArrayList<>();
 
         // 匹配1-6级标题的正则表达式
