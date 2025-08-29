@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * 存储表
@@ -55,19 +56,21 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, FilesEntity>
         entity.setSize(file.getSize());
         LocalDate now = LocalDate.now();
         Path relativePath = Path.of("" + now.getYear(), "" + now.getMonth(), "" + now.getDayOfMonth());
-        entity.setUrl(relativePath.toString());
+        String uuid = UUID.randomUUID().toString();
+        Path path = relativePath.resolve(uuid);
+        entity.setUrl(path.toString());
         save(entity);
 
-        writeFile(file, relativePath);
+        writeFile(file, relativePath, path);
         return entity.getId();
     }
 
-    private void writeFile(MultipartFile file, Path relativePath) {
+    private void writeFile(MultipartFile file, Path relativePath, Path path) {
         Path destinationPath = systemProperties.getBasePath().resolve(relativePath);
         if(!Files.exists(destinationPath)) {
             try {
                 Files.createDirectories(destinationPath);
-                file.transferTo(destinationPath);
+                file.transferTo(path);
             } catch (IOException e) {
                 throw new StoreException("磁盘异常", e);
             }
