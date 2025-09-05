@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 
-
+import com.wrp.raywing.blog.dict.CatalogType;
 import com.wrp.raywing.common.domain.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,6 +30,11 @@ public class CatalogEntity extends BaseEntity {
 	 * 父级目录ID
 	 */
 	private Long parentId;
+
+	/**
+	 * 目录分类
+	 */
+	private CatalogType catalogType;
 	/**
 	 * 文章数量
 	 */

@@ -1,7 +1,9 @@
 package com.wrp.raywing.blog.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wrp.raywing.blog.dict.CatalogType;
 import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 import com.wrp.raywing.blog.service.ArticleService;
 import com.wrp.raywing.blog.service.CatalogArticleService;
@@ -14,10 +16,7 @@ import com.wrp.raywing.blog.entity.CatalogEntity;
 import com.wrp.raywing.blog.service.CatalogService;
 import com.wrp.raywing.common.domain.PageParam;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 目录分类
@@ -41,7 +40,8 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, CatalogEntity
 
     @Override
     public List<CatalogEntity> tree() {
-        List<CatalogEntity> list = list();
+        List<CatalogEntity> list = list(new LambdaQueryWrapper<CatalogEntity>()
+                .eq(CatalogEntity::getCatalogType, CatalogType.DIRECTORY));
         Map<Long, CatalogEntity> map = new HashMap<>();
         for (CatalogEntity catalogEntity : list) {
             catalogEntity.setChild(new ArrayList<>());
@@ -65,5 +65,20 @@ public class CatalogServiceImpl extends ServiceImpl<CatalogMapper, CatalogEntity
             entity.setArticleCount(entity.getArticleCount() + 1);
             updateById(entity);
         }
+    }
+
+    @Override
+    public List<CatalogEntity> books(Long id) {
+        if(getById(id) != null) {
+            return subList(id);
+        }
+
+        return list(new LambdaQueryWrapper<CatalogEntity>()
+                .eq(CatalogEntity::getCatalogType, CatalogType.BOOK));
+    }
+
+    private List<CatalogEntity> subList(Long parentId) {
+        return list(new LambdaQueryWrapper<CatalogEntity>()
+                .eq(CatalogEntity::getParentId, parentId));
     }
 }

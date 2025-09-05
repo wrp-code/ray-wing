@@ -4,6 +4,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 const Home = () => import('@/views/Home.vue')
 const ArticleDetail = () => import('@/views/ArticleDetail.vue')
 const ArticleList = () => import('@/views/ArticleList.vue')
+const Projects = () => import('@/views/Projects.vue')
+const Drawing = () => import('@/views/Drawing.vue')
+const AboutMe = () => import('@/views/AboutMe.vue')
 
 // 2. 定义路由规则
 const routes = [
@@ -21,6 +24,21 @@ const routes = [
     path: '/article/list',
     name: 'articleList',
     component: ArticleList
+  },
+  {
+    path: '/project/list',
+    name: 'projects',
+    component: Projects
+  },
+  {
+    path: '/drawing',
+    name: 'drawing',
+    component: Drawing
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutMe
   }
 ]
 

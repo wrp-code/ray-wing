@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.wrp.raywing.user.entity.SysUserEntity;
 import com.wrp.raywing.user.service.SysUserService;
-import java.util.List;
 import com.wrp.raywing.common.domain.PageParam;
 
 

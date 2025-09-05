@@ -19,6 +19,7 @@
     <module>ray-wing-blog</module>
     <module>ray-wing-generator</module>
       <module>ray-wing-user</module>
+      <module>ray-wing-store</module>
   </modules>
 
   <properties>
@@ -28,7 +29,7 @@
 
     <spring.boot.version>3.5.3</spring.boot.version>
     <mybatis.plus.version>3.5.12</mybatis.plus.version>
-    <spring.doc.version>2.8.9</spring.doc.version>
+    <knite4j.version>4.5.0</knite4j.version>
     <hutool.version>5.8.27</hutool.version>
     <revision>0.0.1</revision>
   </properties>
@@ -62,6 +63,18 @@
       <dependency>
         <groupId>com.wrp</groupId>
         <artifactId>ray-wing-common</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.wrp</groupId>
+        <artifactId>ray-wing-store</artifactId>
+        <version>${revision}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.wrp</groupId>
+        <artifactId>ray-wing-user</artifactId>
         <version>${revision}</version>
       </dependency>
     </dependencies>

@@ -2,6 +2,8 @@ package com.wrp.raywing.common.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wrp.raywing.common.annotation.UpdateGroup;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 public class BaseEntity {
+    @NotNull(groups = UpdateGroup.class)
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     @JsonIgnore

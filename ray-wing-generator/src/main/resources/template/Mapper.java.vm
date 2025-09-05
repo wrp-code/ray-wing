@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.entity;
+package ${package}.${moduleName}.mapper;
 
 import ${package}.${moduleName}.entity.${className}Entity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

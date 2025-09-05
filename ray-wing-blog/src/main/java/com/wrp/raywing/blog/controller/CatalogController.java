@@ -33,14 +33,20 @@ public class CatalogController {
         return Result.success(catalogService.tree());
     }
 
+    @Operation(summary = "查询书籍列表")
+    @GetMapping("books")
+    public Result<List<CatalogEntity>> books(@RequestParam(value = "id", required = false) Long id) {
+        return Result.success(catalogService.books(id));
+    }
+
     /**
      * 添加目录
      */
     @Operation(summary = "添加目录")
     @PostMapping("add")
-    public Result<Void> add(@RequestBody CatalogEntity catalog) {
+    public Result<Long> add(@RequestBody CatalogEntity catalog) {
         catalogService.save(catalog);
-        return Result.success();
+        return Result.success(catalog.getId());
     }
 
     /**

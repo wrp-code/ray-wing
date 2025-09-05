@@ -23,5 +23,10 @@
             <groupId>com.wrp</groupId>
             <artifactId>ray-wing-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.wrp</groupId>
+            <artifactId>ray-wing-store</artifactId>
+        </dependency>
     </dependencies>
 </project>

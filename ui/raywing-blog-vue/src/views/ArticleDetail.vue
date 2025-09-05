@@ -1,22 +1,31 @@
 <template>
   <div class="article-container">
-    <h2 class="article-title">{{ article.title }}</h2>
+    <div class="content">
+      <h1 class="article-title">{{ article.title }}</h1>
     <div 
       v-highlight 
       v-html="compiledMarkdown" 
       class="markdown-body"
     ></div>
+    </div>
+
+    <div class="sidebar">
+      <TOC :markdownContent="markdownText" />
+    </div>
   </div>
 </template>
 
 <script setup>
+import TOC from '../components/TOC.vue';
 import { getArticleDetail } from '../api/article'
 import { useRoute } from 'vue-router'
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onBeforeMount, watch, nextTick } from 'vue'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
 import 'github-markdown-css/github-markdown.css'
+
+const markdownText = ref([]);
 
 // 初始化marked配置
 marked.setOptions({
@@ -37,11 +46,12 @@ const vHighlight = {
   mounted(el) {
     highlightCodeBlocks(el)
     addCopyButtons(el)
-    
+    addId(el)
   },
   updated(el) {
     highlightCodeBlocks(el)
     addCopyButtons(el)
+    addId(el)
   }
 }
 
@@ -52,6 +62,16 @@ const highlightCodeBlocks = (el) => {
     hljs.highlightElement(block)
     block.parentElement.style.position = 'relative'
   })
+}
+
+// 添加id
+const addId = (el) => {
+    const hs = document.querySelectorAll('.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6');
+
+    for(let i = 0; i< hs.length-1; i++) {
+      const anchor = markdownText.value[i].anchor
+      hs[i].id = anchor
+    }
 }
 
 // 添加复制按钮
@@ -87,6 +107,7 @@ const fetchArticle = async () => {
     title: articleDetail.title,
     content: articleDetail.content
   }
+  markdownText.value = articleDetail.contentTable
   compiledMarkdown.value = marked(article.value.content)
 }
 
@@ -98,7 +119,7 @@ watch(() => article.value.content, () => {
   })
 })
 
-onMounted(async () => {
+onBeforeMount(async () => {
   await fetchArticle()
 })
 </script>
@@ -107,7 +128,6 @@ onMounted(async () => {
 .article-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .article-title {
@@ -161,4 +181,19 @@ onMounted(async () => {
     border-radius: 6px;
   }
 }
+
+.article-container {
+  display: flex;
+}
+
+.content {
+  padding: 20px;
+  min-width: 800px;
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+}
+
 </style>
