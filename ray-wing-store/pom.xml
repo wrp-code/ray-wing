@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>com.wrp</groupId>
-            <artifactId>ray-wing-common</artifactId>
+            <artifactId>ray-wing-web-base</artifactId>
         </dependency>
     </dependencies>
 </project>

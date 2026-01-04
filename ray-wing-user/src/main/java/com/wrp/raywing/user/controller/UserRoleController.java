@@ -2,6 +2,7 @@ package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class UserRoleController {
     public Result<IPage<UserRoleEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<UserRoleEntity> page = userRoleService.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +42,7 @@ public class UserRoleController {
     public Result<UserRoleEntity> info(@PathVariable("id") Long id){
 		UserRoleEntity userRole = userRoleService.getById(id);
 
-        return Result.success(userRole);
+        return ResultUtils.success(userRole);
     }
 
     /**
@@ -51,7 +52,7 @@ public class UserRoleController {
     public Result<Void> save(@RequestBody @Validated UserRoleEntity userRole){
 		userRoleService.save(userRole);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +62,7 @@ public class UserRoleController {
     public Result<Void> update(@RequestBody @Validated UserRoleEntity userRole){
 		userRoleService.updateById(userRole);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +72,7 @@ public class UserRoleController {
     public Result<Void> delete(@PathVariable("id") Long id){
 		userRoleService.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

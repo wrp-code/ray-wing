@@ -2,6 +2,7 @@ package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class PermissionController {
     public Result<IPage<PermissionEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<PermissionEntity> page = permissionService.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +42,7 @@ public class PermissionController {
     public Result<PermissionEntity> info(@PathVariable("id") Long id){
 		PermissionEntity permission = permissionService.getById(id);
 
-        return Result.success(permission);
+        return ResultUtils.success(permission);
     }
 
     /**
@@ -51,7 +52,7 @@ public class PermissionController {
     public Result<Void> save(@RequestBody @Validated PermissionEntity permission){
 		permissionService.save(permission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +62,7 @@ public class PermissionController {
     public Result<Void> update(@RequestBody @Validated PermissionEntity permission){
 		permissionService.updateById(permission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +72,7 @@ public class PermissionController {
     public Result<Void> delete(@PathVariable("id") Long id){
 		permissionService.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

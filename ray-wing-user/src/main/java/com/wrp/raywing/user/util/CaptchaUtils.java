@@ -1,4 +1,4 @@
-package com.wrp.raywing.common.util;
+package com.wrp.raywing.user.util;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

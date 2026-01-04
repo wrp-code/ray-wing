@@ -35,7 +35,7 @@ public class ArticleController {
     @GetMapping("/list")
     public Result<List<ArticleEntity>> list(@RequestParam("catalogId") Long catalogId){
 
-        return Result.success(articleService.listByCatalogId(catalogId));
+        return ResultUtils.success(articleService.listByCatalogId(catalogId));
     }
 
     /**
@@ -46,7 +46,7 @@ public class ArticleController {
     public Result<ArticleEntity> info(@PathVariable("id") Long id){
 		ArticleEntity article = articleService.getById(id);
 
-        return Result.success(article);
+        return ResultUtils.success(article);
     }
 
     /**
@@ -55,7 +55,7 @@ public class ArticleController {
     @Operation(summary = "保存文章")
     @PostMapping("save")
     public Result<Long> save(@RequestBody @Validated ArticleEntity article){
-        return Result.success(articleService.submit(article));
+        return ResultUtils.success(articleService.submit(article));
     }
 
     /**
@@ -64,7 +64,7 @@ public class ArticleController {
     @Operation(summary = "更新文章")
     @PutMapping("update")
     public Result<Long> update(@RequestBody @Validated(UpdateGroup.class) ArticleEntity article){
-        return Result.success(articleService.submit(article));
+        return ResultUtils.success(articleService.submit(article));
     }
 
     /**
@@ -73,7 +73,7 @@ public class ArticleController {
     @Operation(summary = "上传markdown格式文章", description = "上传markdown文件来创建文章")
     @PostMapping("upload")
     public Result<Long> upload(@RequestPart("file") MultipartFile file, @RequestParam(value = "id", required = false) Long id){
-        return Result.success(articleService.upload(file, id));
+        return ResultUtils.success(articleService.upload(file, id));
     }
 
 }

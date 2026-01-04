@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 public class RoleEntity extends BaseEntity {
 
 	/**
-	 * 角色
+	 * 角色，唯一
 	 */
 	private String roleName;
 	/**

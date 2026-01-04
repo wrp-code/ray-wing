@@ -2,6 +2,7 @@ package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class RolePermissionController {
     public Result<IPage<RolePermissionEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<RolePermissionEntity> page = rolePermissionService.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +42,7 @@ public class RolePermissionController {
     public Result<RolePermissionEntity> info(@PathVariable("id") Long id){
 		RolePermissionEntity rolePermission = rolePermissionService.getById(id);
 
-        return Result.success(rolePermission);
+        return ResultUtils.success(rolePermission);
     }
 
     /**
@@ -51,7 +52,7 @@ public class RolePermissionController {
     public Result<Void> save(@RequestBody @Validated RolePermissionEntity rolePermission){
 		rolePermissionService.save(rolePermission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +62,7 @@ public class RolePermissionController {
     public Result<Void> update(@RequestBody @Validated RolePermissionEntity rolePermission){
 		rolePermissionService.updateById(rolePermission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +72,7 @@ public class RolePermissionController {
     public Result<Void> delete(@PathVariable("id") Long id){
 		rolePermissionService.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

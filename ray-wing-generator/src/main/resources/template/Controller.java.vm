@@ -31,7 +31,7 @@ public class ${className}Controller {
     public Result<IPage<${className}Entity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<${className}Entity> page = ${classname}Service.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ${className}Controller {
     public Result<${className}Entity> info(@PathVariable("id") Long id){
 		${className}Entity ${classname} = ${classname}Service.getById(id);
 
-        return Result.success(${classname});
+        return ResultUtils.success(${classname});
     }
 
     /**
@@ -51,7 +51,7 @@ public class ${className}Controller {
     public Result<Void> save(@RequestBody @Validated ${className}Entity ${classname}){
 		${classname}Service.save(${classname});
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +61,7 @@ public class ${className}Controller {
     public Result<Void> update(@RequestBody @Validated ${className}Entity ${classname}){
 		${classname}Service.updateById(${classname});
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +71,7 @@ public class ${className}Controller {
     public Result<Void> delete(@PathVariable("id") Long id){
 		${classname}Service.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

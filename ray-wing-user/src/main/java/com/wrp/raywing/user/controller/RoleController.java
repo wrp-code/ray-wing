@@ -2,13 +2,13 @@ package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.wrp.raywing.user.entity.RoleEntity;
 import com.wrp.raywing.user.service.RoleService;
-import java.util.List;
 import com.wrp.raywing.common.domain.PageParam;
 
 
@@ -31,7 +31,7 @@ public class RoleController {
     public Result<IPage<RoleEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<RoleEntity> page = roleService.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +41,7 @@ public class RoleController {
     public Result<RoleEntity> info(@PathVariable("id") Long id){
 		RoleEntity role = roleService.getById(id);
 
-        return Result.success(role);
+        return ResultUtils.success(role);
     }
 
     /**
@@ -51,7 +51,7 @@ public class RoleController {
     public Result<Void> save(@RequestBody @Validated RoleEntity role){
 		roleService.save(role);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +61,7 @@ public class RoleController {
     public Result<Void> update(@RequestBody @Validated RoleEntity role){
 		roleService.updateById(role);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +71,7 @@ public class RoleController {
     public Result<Void> delete(@PathVariable("id") Long id){
 		roleService.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

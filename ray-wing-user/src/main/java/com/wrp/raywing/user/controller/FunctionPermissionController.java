@@ -2,6 +2,7 @@ package com.wrp.raywing.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class FunctionPermissionController {
     public Result<IPage<FunctionPermissionEntity>> list(@RequestBody @Validated PageParam<Object> pageParam){
         IPage<FunctionPermissionEntity> page = functionPermissionService.page(pageParam);
 
-        return Result.success(page);
+        return ResultUtils.success(page);
     }
 
     /**
@@ -41,7 +42,7 @@ public class FunctionPermissionController {
     public Result<FunctionPermissionEntity> info(@PathVariable("id") Long id){
 		FunctionPermissionEntity functionPermission = functionPermissionService.getById(id);
 
-        return Result.success(functionPermission);
+        return ResultUtils.success(functionPermission);
     }
 
     /**
@@ -51,7 +52,7 @@ public class FunctionPermissionController {
     public Result<Void> save(@RequestBody @Validated FunctionPermissionEntity functionPermission){
 		functionPermissionService.save(functionPermission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -61,7 +62,7 @@ public class FunctionPermissionController {
     public Result<Void> update(@RequestBody @Validated FunctionPermissionEntity functionPermission){
 		functionPermissionService.updateById(functionPermission);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
     /**
@@ -71,7 +72,7 @@ public class FunctionPermissionController {
     public Result<Void> delete(@PathVariable("id") Long id){
 		functionPermissionService.removeById(id);
 
-        return Result.success();
+        return ResultUtils.success();
     }
 
 }

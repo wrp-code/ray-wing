@@ -1,6 +1,7 @@
 package com.wrp.raywing.store.controller;
 
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import com.wrp.raywing.store.service.FilesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +28,6 @@ public class StoreController {
     @PostMapping("upload")
     public Result<Long> upload(@RequestPart("file") MultipartFile file) {
 
-        return Result.success(filesService.upload(file));
+        return ResultUtils.success(filesService.upload(file));
     }
 }

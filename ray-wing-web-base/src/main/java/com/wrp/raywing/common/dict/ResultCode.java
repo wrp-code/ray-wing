@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum ResultCode {
+public enum ResultCode implements BaseEnum {
     SUCCESS(0, "成功"),
     ERROR(1, "失败")
     ;

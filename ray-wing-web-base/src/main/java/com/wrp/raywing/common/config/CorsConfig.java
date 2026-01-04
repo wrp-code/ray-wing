@@ -12,7 +12,7 @@ import org.springframework.web.filter.CorsFilter;
  * @since 2025年08月18日 12:27
  **/
 @Configuration
-public class WebConfig {
+public class CorsConfig {
 
     @Profile("dev")
     @Bean

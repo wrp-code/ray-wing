@@ -1,6 +1,7 @@
 package com.wrp.raywing.common.exception;
 
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -20,26 +21,26 @@ public class GlobalExceptionControllerAdvice {
 
     @ExceptionHandler(NoResourceFoundException.class)
     public Result<Void> handleNoResourceFoundException(NoResourceFoundException e) {
-        return Result.error(e.getLocalizedMessage());
+        return ResultUtils.error(e.getLocalizedMessage());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result<Void> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        return Result.error(e.getLocalizedMessage());
+        return ResultUtils.error(e.getLocalizedMessage());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public Result<Void> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        return Result.error("参数格式不正确");
+        return ResultUtils.error("参数格式不正确");
     }
 
     @ExceptionHandler(Exception.class)
     public Result<Void> fallback(Exception e) {
         if(e instanceof BaseException baseException) {
-            return Result.error(baseException.getMessage());
+            return ResultUtils.error(baseException.getMessage());
         }
 
         log.error("系统遇到未知的错误", e);
-        return Result.error("系统遇到未知的错误");
+        return ResultUtils.error("系统遇到未知的错误");
     }
 }

@@ -1,22 +1,13 @@
-package com.wrp.raywing.common.domain;
+package com.wrp.raywing.common.util;
 
 import com.wrp.raywing.common.dict.ResultCode;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.wrp.raywing.common.domain.Result;
 
 /**
- * 统一返回结果
  * @author wrp
- * @since 2025年07月04日 20:33
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Result <T> {
-    private int code;
-    private String message;
-    private T data;
+ * @since 2026年01月04日 10:39
+ **/
+public class ResultUtils {
 
     /**
      * 返回成功，无数据
@@ -49,4 +40,5 @@ public class Result <T> {
     private static <R> Result<R> of(ResultCode code, R data) {
         return new Result<>(code.getCode(), code.getValue(), data);
     }
+
 }

@@ -15,11 +15,11 @@
   </description>
 
   <modules>
-    <module>ray-wing-common</module>
+    <module>ray-wing-web-base</module>
     <module>ray-wing-blog</module>
     <module>ray-wing-generator</module>
-      <module>ray-wing-user</module>
-      <module>ray-wing-store</module>
+    <module>ray-wing-user</module>
+    <module>ray-wing-store</module>
   </modules>
 
   <properties>
@@ -27,7 +27,7 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
 
-    <spring.boot.version>3.5.3</spring.boot.version>
+    <spring.boot.version>4.0.1</spring.boot.version>
     <mybatis.plus.version>3.5.12</mybatis.plus.version>
     <knite4j.version>4.5.0</knite4j.version>
     <hutool.version>5.8.27</hutool.version>
@@ -62,7 +62,7 @@
 
       <dependency>
         <groupId>com.wrp</groupId>
-        <artifactId>ray-wing-common</artifactId>
+        <artifactId>ray-wing-web-base</artifactId>
         <version>${revision}</version>
       </dependency>
 
