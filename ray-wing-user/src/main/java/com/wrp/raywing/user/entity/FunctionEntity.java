@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * ${comments}
+ * 功能，更好的展示权限，而不是介于角色和权限之间的中间对象
  * 
  * @author wrp
  * @since 2025-08-18 11:24:19
