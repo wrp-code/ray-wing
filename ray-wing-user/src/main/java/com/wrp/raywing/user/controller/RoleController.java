@@ -13,7 +13,7 @@ import com.wrp.raywing.common.domain.PageParam;
 
 
 /**
- * 功能接口
+ * 角色接口
  *
  * @author wrp
  * @since 2025-08-18 11:24:19

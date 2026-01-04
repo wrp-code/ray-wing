@@ -14,7 +14,7 @@ import com.wrp.raywing.common.domain.PageParam;
 
 
 /**
- * 角色接口
+ * 权限接口
  *
  * @author wrp
  * @since 2025-08-18 11:24:19

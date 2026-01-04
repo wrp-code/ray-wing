@@ -43,12 +43,14 @@
             <version>${mybatis.plus.version}</version>
         </dependency>
 
+        <!--    mybatis-plus分页查询插件    -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-jsqlparser</artifactId>
             <version>${mybatis.plus.version}</version>
         </dependency>
 
+        <!--    springdoc文档依赖    -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>

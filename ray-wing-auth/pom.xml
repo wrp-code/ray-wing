@@ -4,29 +4,20 @@
     <parent>
         <groupId>com.wrp</groupId>
         <artifactId>ray-wing</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1</version>
     </parent>
 
-    <artifactId>ray-wing-user</artifactId>
+    <artifactId>ray-wing-auth</artifactId>
     <packaging>jar</packaging>
 
-    <name>ray-wing-user</name>
-    <description>用户管理模块</description>
+    <name>ray-wing-auth</name>
+    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.wrp</groupId>
-            <artifactId>ray-wing-web-base</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
     </dependencies>
 </project>

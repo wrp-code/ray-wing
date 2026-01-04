@@ -2,6 +2,7 @@ package com.wrp.raywing.user.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wrp.raywing.user.controller.param.RegisterUser;
 import com.wrp.raywing.user.entity.SysUserEntity;
 
 import com.wrp.raywing.common.domain.PageParam;
@@ -15,5 +16,7 @@ import com.wrp.raywing.common.domain.PageParam;
 public interface SysUserService extends IService<SysUserEntity> {
 
     IPage<SysUserEntity> page(PageParam<Object> pageParam);
+
+    Long register(RegisterUser registerUser);
 }
 

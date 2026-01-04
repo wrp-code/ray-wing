@@ -2,6 +2,7 @@ package com.wrp.raywing.blog.controller;
 
 import com.wrp.raywing.common.annotation.UpdateGroup;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

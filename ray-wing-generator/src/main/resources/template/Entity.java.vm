@@ -1,6 +1,7 @@
 package ${package}.${moduleName}.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -32,6 +33,7 @@ public class ${className}Entity extends BaseEntity {
 	#if($column.columnName == $pk.columnName)
 @TableId
 	#end
+@Schema(name = "$column.comments")
 private $column.attrType $column.attrname;
 #end
 

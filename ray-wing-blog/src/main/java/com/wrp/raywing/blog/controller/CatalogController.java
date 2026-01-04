@@ -4,6 +4,7 @@ import com.wrp.raywing.blog.entity.CatalogArticleEntity;
 import com.wrp.raywing.blog.entity.CatalogEntity;
 import com.wrp.raywing.blog.service.CatalogService;
 import com.wrp.raywing.common.domain.Result;
+import com.wrp.raywing.common.util.ResultUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
