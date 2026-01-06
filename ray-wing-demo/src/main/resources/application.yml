@@ -1,0 +1,8 @@
+
+spring:
+  data:
+    redis:
+      host: 8.145.42.30
+      password: wrp0601@REdis
+server:
+  port: 9901
